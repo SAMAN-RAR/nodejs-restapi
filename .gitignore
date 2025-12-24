@@ -1,4 +1,5 @@
-.gitgnore
-node-modules
+.gitignore
+node_modules/
+.vscode/
 TODO.txt
 .env
