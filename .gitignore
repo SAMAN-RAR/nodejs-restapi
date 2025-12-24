@@ -1,2 +1,4 @@
+.gitgnore
 node-modules
 TODO.txt
+.env
