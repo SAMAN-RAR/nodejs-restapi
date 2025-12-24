@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const path = require('path');
 
 const express = require('express');
@@ -54,17 +56,26 @@ app.use((error, req, res, next) => {
   res.status(statusCode).json({ message, data });
 });
 
-const MONGODB_URI =
-  'mongodb+srv://saman:930957S.f@cluster0.nkbt7xy.mongodb.net/messages?appName=Cluster0';
+const MONGODB_URI = process.env.MONGODB_URI;
+const PORT = process.env.PORT || 8080;
+
+if (!MONGODB_URI) {
+  console.error('MONGODB_URI environment variable is not set!');
+  process.exit(1);
+}
+
 mongoose
   .connect(MONGODB_URI)
   .then((result) => {
-    const server = app.listen(8080);
+    const server = app.listen(PORT, () => {
+      console.log(`Server running on port ${PORT}`);
+    });
     const io = require('./socket').init(server);
     io.on('connection', (socket) => {
-      console.log('Clinet Connected!');
+      console.log('Client Connected!');
     });
   })
   .catch((err) => {
-    console.log(err);
+    console.error('Database connection error:', err);
+    process.exit(1);
   });

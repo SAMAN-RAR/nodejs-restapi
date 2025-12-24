@@ -5,13 +5,15 @@
   "main": "app.js",
   "scripts": {
     "test": "mocha",
-    "start": "nodemon app.js"
+    "start": "node app.js",
+    "dev": "nodemon app.js"
   },
   "author": "saman.rar",
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^3.0.3",
     "body-parser": "^2.2.1",
+    "dotenv": "^16.3.1",
     "express": "^5.2.1",
     "express-validator": "^7.3.1",
     "jsonwebtoken": "^9.0.3",
